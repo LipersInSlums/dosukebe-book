@@ -1,0 +1,11 @@
+# settings, build scripts
+book/ @LoliGothick
+build.sh @LoliGothick
+
+# chapter authors
+chapters/alwe/* @Alwe-logic
+chapters/hsjoihs/* @hsjoihs
+chapters/lugendre/* @Lugendre
+chapters/mitama/* @LoliGOthick
+chapters/wreulicke/* @wreulicke
+chapters/yuche/* @syuche
