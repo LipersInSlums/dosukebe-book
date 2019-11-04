@@ -505,13 +505,12 @@ complexmatrixという識別子に基づく画像ファイルが貼り込まれ�
 
 本文中のインライン命令「`@<fn>{site}`」は脚注番号に置換され、「本書のサポートサイト……」という文は実際の脚注に変換されます。
 
-注意: TeX PDF において、コラムや表など平文でないところで「`@<fn>{～}`」を使うには、`footnotetext` オプションを使う必要があります。
+注意: TeX PDF において、コラムの中で脚注を利用する場合、`//footnote` 行はコラムの終わり（`==[/column]` など）の後ろに記述することをお勧めします。Re:VIEW の標準提供のコラム表現では問題ありませんが、サードパーティのコラムの実装によってはおかしな採番表現になることがあります。
 
 ### footnotetext オプション
+TeX PDF において、コラム以外の `//note` などの囲み記事の中で「`@<fn>{～}`」を使うには、`footnotetext` オプションを使う必要があります。
 
 `footnotetext` オプションを使うには、`config.yml` ファイルに`footnotetext: true` を追加します。
-
-これで PDF のコラムや表のなかでも脚注が使えるようになります。
 
 ただし、通常の脚注（footnote）ではなく、footnotemark と footnotetext を使うため、本文と脚注が別ページに分かれる可能性があるなど、いろいろな制約があります。また、採番が別々になるため、footnote と footnotemark/footnotetext を両立させることはできません。
 
@@ -638,8 +637,8 @@ imgmath_options:
   pdfcrop_cmd: "pdfcrop --hires %i %o"
   # PDFから画像化するコマンドのコマンドライン。プレースホルダは
   # %i: 入力ファイル、%o: 出力ファイル、%O: 出力ファイルから拡張子を除いたもの
-  # %p: 対象ページ番号
-  pdfcrop_pixelize_cmd: "pdftocairo -png -r 90 -f %p -l %p -singlefile %i %O"
+  # %p: 対象ページ番号、%t: フォーマット
+  pdfcrop_pixelize_cmd: "pdftocairo -%t -r 90 -f %p -l %p -singlefile %i %O"
   # pdfcrop_pixelize_cmdが複数ページの処理に対応していない場合に単ページ化するか
   extract_singlepage: null
   # 単ページ化するコマンドのコマンドライン
@@ -671,6 +670,17 @@ imgmath_options:
   pdfcrop_pixelize_cmd: "magick -density 200x200 %i %o"
   # sipsを利用する例
   pdfcrop_pixelize_cmd: "sips -s format png --out %o %i"
+```
+
+textmaker 向けに PDF 形式の数式ファイルを作成したいときには、たとえば以下のように設定します（ページの抽出には pdftk を利用）。
+
+```
+imgmath: true
+imgmath_options:
+  format: pdf
+  extract_singlepage: true
+  pdfextract_cmd: "pdftk A=%i cat A%p output %o"
+  pdfcrop_pixelize_cmd: "mv %i %o"
 ```
 
 Re:VIEW 2 以前の dvipng の設定に合わせるには、次のようにします。
