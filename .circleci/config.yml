@@ -1,0 +1,21 @@
+version: 2.1
+
+executors:
+  build:
+    docker:
+      - image: vvakame/review:4.0
+    working_directory: /repo
+
+jobs:
+  build:
+    executor: build
+    steps:
+      - checkout
+      - run: ./build.sh
+      - store_artifacts:
+          path: /home/circleci/repo/book.pdf
+
+workflows:
+  build:
+    jobs:
+      - build
