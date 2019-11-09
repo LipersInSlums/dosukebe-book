@@ -17,7 +17,7 @@ $ git clone git@github.com:LipersInSlums/dosukebe-book.git
 
 ## docker を使う場合
 
-- [docker intall](https://docs.docker.com/install/) にしたがってインストール。
+- [docker install](https://docs.docker.com/install/) にしたがってインストール。
 - dockerユーザーグループにユーザーを追加する（任意だが、以下はやったものとして進める）
 - `docker pull vvakame/review:4.0`で公式のDocker Imageをもってくる。
 
