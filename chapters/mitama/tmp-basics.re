@@ -1,4 +1,4 @@
-= C++メタプログラミングの夜明け
+= メタプログラミングの夜明け
 
 この章ではC++のテンプレートメタプログラミングについて解説する。
 サンプルコードでC++の機能を使い倒すことになるだろうが、
@@ -39,7 +39,7 @@ C++にはテンプレートという機能がある。
 
 C++にはオーバーロードがあり、関数を引数の型で呼び分けることができるので次が可能。
 
-//emlist[関数オーバーロード][cpp]{
+//emlist[関数オーバーロード][cpp-example]{
 int twice(int a, int b) { return a + b; }           // #1
 double twice(double a, double b) { return a + b; }  // #2
 
@@ -54,7 +54,7 @@ int main() {
 
 そこで関数テンプレートを使う。
 
-//emlist[関数テンプレート][cpp]{
+//emlist[関数テンプレート][cpp-example]{
 template <class T>
 T twice(T a, T b) { return a + b; }
 
@@ -71,7 +71,7 @@ int main() {
 
 同様にクラステンプレートも可能である。
 
-//emlist[クラステンプレート][cpp]{
+//emlist[クラステンプレート][cpp-example]{
 template <class T>
 struct MyClass {
     T value_;
@@ -97,7 +97,7 @@ int main() {
 クラス名に対して@<code>{MyClass<void>}のように
 明示的にテンプレートパラメータを指定したものをクラステンプレートの明示的特殊化と呼ぶ。
 
-//emlist[クラステンプレートの明示的特殊化][cpp]{
+//emlist[クラステンプレートの明示的特殊化][cpp-example]{
 template <class T>
 strcut MyClass { // プライマリーテンプレート
     static func() { return "primary"; }
@@ -124,7 +124,7 @@ int main() {
 
 早速、コンパイル時に階乗を計算を計算してみよう。
 
-//emlist[enum hack][cpp]{
+//emlist[enum hack][cpp-example]{
 template <int N>
 struct Factorial 
 { enum { value = N * Factorial<N - 1>::value }; };
@@ -140,6 +140,7 @@ int main() {
 
 テンプレートの明示的特殊化が分岐として機能し、再帰的にクラステンプレートが実体化することにより計算が可能になる。
 
-これが、テンプレートメタプログラミングのアイデアである。
-この技法が発見（発明ではなく発見）されたことをきっかけに次々とメタプログラミング技法が次々と見出されることになる。
+これが、原初に発見された（発明ではなく発見）テンプレートメタプログラミングのアイデアである。
+最初にメタプログラミングが発見されたあと、次々とメタプログラミング技法が次々と見出されることになる。
 結果として、C++は大メタプログラミング時代に突入した。
+このメタプログラミングの波は他の言語にも大きな影響を与えたのではないかと思う。

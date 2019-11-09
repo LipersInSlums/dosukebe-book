@@ -2,12 +2,19 @@ PREDEF:
   - intro.re
 
 CHAPS:
-  - alwe-dummy.re
-  - hsjoihs-dummy.re
-  - lugendre-dummy.re
-  - mitama-tmp-basics.re
-  - wreulicke-dummy.re
-  - yuche-dummy.re
+  - 第1部:
+    - alwe-dummy.re
+  - 第2部:
+    - hsjoihs-dummy.re
+  - 第3部:
+    - lugendre-dummy.re
+  - mitama-part4.re:
+    - mitama-tmp-basics.re
+    - mitama-sfinae-awaken.re
+  - 第4部:
+    - wreulicke-dummy.re
+  - 第5部:
+    - yuche-dummy.re
 
 APPENDIX:
 
