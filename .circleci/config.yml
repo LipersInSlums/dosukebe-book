@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run: ./build.sh
       - store_artifacts:
-          path: /home/circleci/repo/book.pdf
+          path: /repo/book.pdf
 
 workflows:
   build:
