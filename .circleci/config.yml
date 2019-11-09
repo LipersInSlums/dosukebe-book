@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run: ./build.sh
       - store_artifacts:
-          path: /home/circleci/repo/book.pdf
+          path: /repo/book.pdf
       - persist_to_workspace:
           root: /repo
           paths:
