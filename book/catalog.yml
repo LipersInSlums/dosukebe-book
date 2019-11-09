@@ -8,9 +8,10 @@ CHAPS:
     - hsjoihs-dummy.re
   - 第3部:
     - lugendre-dummy.re
-  - mitama-part4.re:
+  - C++メタプログラミング:
     - mitama-tmp-basics.re
     - mitama-sfinae-awaken.re
+    - mitama-constexpr.re
   - 第4部:
     - wreulicke-dummy.re
   - 第5部:
