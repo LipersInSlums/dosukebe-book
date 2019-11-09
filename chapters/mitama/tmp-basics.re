@@ -61,7 +61,7 @@ T twice(T a, T b) { return a + b; }
 int main() {
     twice<int>(1, 2); // T = int
     twice(1.1, 2.2);  // T = double
-    twice(1.1, 2);    // Error: T = int or double ???
+    // twice(1.1, 2); // Error: T = int or double ???
 }
 //}
 
@@ -98,19 +98,22 @@ int main() {
 明示的にテンプレートパラメータを指定したものをクラステンプレートの明示的特殊化と呼ぶ。
 
 //emlist[クラステンプレートの明示的特殊化][cpp-example]{
+#include <cassert>
+#include <string>
+
 template <class T>
-strcut MyClass { // プライマリーテンプレート
-    static func() { return "primary"; }
+struct MyClass { // プライマリーテンプレート
+    static std::string func() { return "primary"; }
 };
 
 template <>
-strcut MyClass<void> { // テンプレートの明示的特殊化
-    static func() { return "specialization"; }
+struct MyClass<void> { // テンプレートの明示的特殊化
+    static std::string func() { return "specialization"; }
 };
 
 int main() {
-    MyClass<int>::func();  // returns "primary"
-    MyClass<void>::func(); // returns "specialization"
+    assert(MyClass<int>::func() == "primary");
+    assert(MyClass<void>::func() == "specialization");
 }
 //}
 
