@@ -24,7 +24,7 @@ $ git clone git@github.com:LipersInSlums/dosukebe-book.git
 以下のコマンドでビルド可能。
 
 ```shell
-docker run --mount type=bind,source=/absolute/path/to/dosukebe-book,target=/book --rm -it vvakame/review:4.0 /bin/sh -c "cd /book && ./build.sh"
+docker-compose up
 ```
 
 注意:
