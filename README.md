@@ -17,14 +17,14 @@ $ git clone git@github.com:LipersInSlums/dosukebe-book.git
 
 ## docker を使う場合
 
-- [docker intall](https://docs.docker.com/install/) にしたがってインストール。
+- [docker install](https://docs.docker.com/install/) にしたがってインストール。
 - dockerユーザーグループにユーザーを追加する（任意だが、以下はやったものとして進める）
 - `docker pull vvakame/review:4.0`で公式のDocker Imageをもってくる。
 
 以下のコマンドでビルド可能。
 
 ```shell
-docker run --mount type=bind,source=/absolute/path/to/dosukebe-book,target=/book --rm -it vvakame/review:4.0 /bin/sh -c "cd /book && ./build.sh"
+docker-compose up
 ```
 
 注意:

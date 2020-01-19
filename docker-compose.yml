@@ -1,0 +1,8 @@
+version: '2'
+services:
+  review:
+    image: vvakame/review:4.0
+    command: ./build.sh
+    working_dir: /book
+    volumes:
+      - .:/book
