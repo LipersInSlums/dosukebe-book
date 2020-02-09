@@ -125,11 +125,11 @@ int main() {
 
 //emlist[enum hack][cpp-example]{
 template <int N>
-struct Factorial 
+struct Factorial
 { enum { value = N * Factorial<N - 1>::value }; };
 
 template <>
-struct Factorial<0> 
+struct Factorial<0>
 { enum { value = 1 }; };
 
 int main() {
@@ -138,6 +138,10 @@ int main() {
 //}
 
 テンプレートの明示的特殊化が分岐として機能し、再帰的にクラステンプレートが実体化することにより計算が可能になる。
+
+さらっと登場した@<code>{template <int N>}なる文法は@<b>{Non-Type Template Parameter (非型テンプレート引数)}という機能。
+型ではないもの（C++17までは整数かenum値のみ）を渡すことができる機能である。
+整数を直接テンプレートに埋め込めるため、ペアノ数などを型で表現する必要はない。
 
 これが、原初に発見された（発明ではなく発見）テンプレートメタプログラミングのアイデアである。
 最初にメタプログラミングが発見されたあと、次々とメタプログラミング技法が見出されることになる。
