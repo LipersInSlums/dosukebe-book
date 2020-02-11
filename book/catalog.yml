@@ -12,6 +12,7 @@ CHAPS:
     - mitama-tmp-basics.re
     - mitama-sfinae-awaken.re
     - mitama-constexpr.re
+    - mitama-variadic-templates.re
   - 第4部:
     - wreulicke-dummy.re
   - 第5部:

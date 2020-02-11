@@ -35,7 +35,7 @@ jobs:
                   if ($0 ~ "\/\/emlist\[.*\]\[cpp-example\]\{$") { i++ } \
                   else { print $0 >> "test/" file "-" i ".cpp" } \
               }'
-          find test -type f -name \*.cpp | xargs -I@ bash -c "$CXX -I./mitama-cpp-result/include/ @ -std=c++17 && ./a.out"
+          find test -type f -name \*.cpp | xargs -I@ bash -c "echo @;$CXX -I./mitama-cpp-result/include/ @ -std=c++17 && ./a.out"
 
 workflows:
   build:

@@ -17,7 +17,7 @@ C++11ではこれを補助するため、標準ライブラリに@<code>{<type_t
 
 C++のクラスはメンバに型を持つことができる。
 
-//emlist[関連型][cpp]{
+//emlist[関連型][]{
 template <class T>
 struct MyClass { using value_type = T; };
 //}
@@ -31,7 +31,7 @@ struct MyClass { using value_type = T; };
 
 次の関数#1は引数の型Tがvalue_typeという関連型を持っていない場合オーバーロードの候補から除外される。
 
-//emlist[][cpp-example]{
+//emlist[SFINAEの利用][cpp-example]{
 template <class T>
 struct MyClass { using value_type = T; };
 
@@ -78,10 +78,10 @@ std::enable_if_t<{Tに関して何かを判定する}, {戻り値型}>
 func(T const&) { return ...; }
 //}
 
-== メタ述語
+== メタ関数
 
 {Tに関して何かを判定する}のところには型を受け取ってbool値を返すものを書く必要がある。
-型を受け取ってなにか結果を返すようなものはC++ではメタ述語（メタ関数）と呼ばれている。
+型を受け取ってなにか結果を返すようなものはC++ではメタ関数と呼ばれている。
 
 標準ライブラリ@<code>{<type_traits>}にはメタ関数が100個以上用意されている。
 メタ関数は大きく分けて、型を受け取り型を返すものと、型を受け取って加工された型を返すものがある。

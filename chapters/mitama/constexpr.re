@@ -35,18 +35,26 @@ C++11から導入された言語機能。
 C++03ではconstexprがないため、Non-type template parameterに整数を埋め込むという荒業を行うことで実現される。
 
 //emlist[階乗を求めるコンパイル時関数（C++03）][cpp-example]{
-template <size_t N>
-constexpr size_t fact1() { return N*fact1<N-1>(); }
+template <unsigned long N>
+struct factorial { enum { value = N*factorial<N-1>::value }; };
 
 template <>
-constexpr size_t fact1<0>() { return 1; }
+struct factorial<0> { enum { value = 1 }; };
+
+int main() {
+    const unsigned long fact6 = factorial<6>::value; // 720
+}
 //}
 
-C++11ではconstexprが導入されたが、return文一つ以外に何も書くことができないため、条件演算子と再帰を使って実現される。
+C++11ではconstexprが導入されたが、return文一つ以外に何も書くことができない。
+条件分岐は条件演算子、ループは再帰を使って実現される。
 
 //emlist[階乗を求めるコンパイル時関数（C++11）][cpp-example]{
 constexpr int factorial (int n) {
     return n > 0 ? n * factorial( n - 1 ) : 1;
+}
+int main() {
+    constexpr auto fact6 = factorial(6); // 720
 }
 //}
 
@@ -60,7 +68,8 @@ constexpr int factorial (int n) {
     while (n --> 1) res *= n;
     return res;
 }
+int main() {
+    constexpr auto fact6 = factorial(6); // 720
+}
 //}
-
-
 

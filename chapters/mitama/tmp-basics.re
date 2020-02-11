@@ -67,7 +67,7 @@ int main() {
 
 同様にクラステンプレートも可能である。
 
-//emlist[クラステンプレート][cpp-example]{
+//emlist[クラステンプレート][]{
 template <class T>
 struct MyClass {
     T value_;
