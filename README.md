@@ -52,3 +52,30 @@ $ sudo add-apt-repository \
 Debian系の場合、上記Docker imageを参考に必要物を入れていけばできるはずだ。
 
 PDFを作るだけであれば、TeXLiveとreviewがあれば他にはなにもいらない。
+
+## 執筆のルール
+
+### reファイルを置く場所
+
+`repository-root/chapters/{自分のディレクトリ}` 以下に配置すること。
+一つのファイルが1章になる。
+
+### catalog.ymlファイルの編集
+
+以下のように章を2つ作った場合を考える。
+
+```
+chapters/
+　├ mitama/
+　 └ cp1.re
+　 └ cp2.re
+```
+
+`book/catalog.yml`を次のように編集することでPDFに反映される。
+`repository-root/chapters/{自分のディレクトリ}`における`{自分のディレクトリ}`を接頭辞としてハイフンに続いてファイル名を記述する必要がある。
+
+```diff
+CHAPS:
++  - mitama-cp1.re
++  - mitama-cp2.re
+```
