@@ -13,6 +13,8 @@ CHAPS:
     - mitama-sfinae-awaken.re
     - mitama-constexpr.re
     - mitama-variadic-templates.re
+    - mitama-concepts.re
+    - mitama-conclusion.re
   - 第4部:
     - wreulicke-dummy.re
   - 第5部:
