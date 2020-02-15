@@ -4,10 +4,6 @@ PREDEF:
 CHAPS:
   - 第1部:
     - alwe-dummy.re
-  - 第2部:
-    - hsjoihs-dummy.re
-  - 第3部:
-    - lugendre-dummy.re
   - C++メタプログラミング:
     - mitama-tmp-basics.re
     - mitama-sfinae-awaken.re
@@ -15,10 +11,14 @@ CHAPS:
     - mitama-variadic-templates.re
     - mitama-concepts.re
     - mitama-conclusion.re
-  - 第4部:
-    - wreulicke-dummy.re
-  - 第5部:
-    - yuche-dummy.re
+  - マネジメント:
+    - yuche-yuche1.re
+    - yuche-yuche2.re
+    - yuche-yuche3.re
+    - yuche-yuche4.re
+    - yuche-yuche5.re
+    - yuche-yuche6.re
+    - yuche-yuche7.re
 
 APPENDIX:
 
