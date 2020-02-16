@@ -11,7 +11,6 @@ SFINAE（Substitution Failure Is Not An Error）とは、
 
 テンプレートの実体化に失敗しても即座にはエラーにならず、他の実体化できるテンプレートを探すという言語仕様のことを指す。
 この機能を利用することによって、テンプレートの実体化を任意にコントロールすることが可能となる。
-C++11ではこれを補助するため、標準ライブラリに@<code>{<type_traits>}ヘッダが登場した。
 
 == 関連型
 
@@ -63,9 +62,6 @@ namespace std {
 
     template <class T>
     struct enable_if<false, T> {};
-
-    template <bool B, class T = void>
-    using enable_if_t = typename enable_if<B, T>::type;
 }
 //}
 
@@ -82,9 +78,5 @@ func(T const&) { return ...; }
 
 {Tに関して何かを判定する}のところには型を受け取ってbool値を返すものを書く必要がある。
 型を受け取ってなにか結果を返すようなものはC++ではメタ関数と呼ばれている。
-
 標準ライブラリ@<code>{<type_traits>}にはメタ関数が100個以上用意されている。
-メタ関数は大きく分けて、型を受け取り型を返すものと、型を受け取って加工された型を返すものがある。
-
-@<code>{enable_if_t}も@<code>{<type_traits>}に存在する。
-
+メタ関数の大部分は、型を受け取り型を返すものと、型を受け取って加工された型を返すものである。

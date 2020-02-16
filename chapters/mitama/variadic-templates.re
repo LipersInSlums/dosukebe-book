@@ -4,44 +4,30 @@
 C++の機能の中でも難しいと言われがちな機能であるが、ジェネリックライブラリの設計やメタプログラミングには欠かせない。
 
 //emlist[可変長テンプレート][]{
-template <class... Types> class X {};
+template <class... Types> class X {}; // 可変長クラステンプレート
 
 template <class... Args>
-void func(Args... args) {
-    // ...
-}
+void func(Args... args); // 可変長関数テンプレート
 //}
 
-@<code>{Args}や@<code>{args}などは@<b>{パラメータパック}と呼ばれ、型や値がまとまった状態になっている。
-これを使用するためにはパラメータパックを@<b>{expansion (展開)}する必要がある。
+@<code>{Args}や@<code>{args}などは@<b>{パラメータパック}と呼ばれ、使用するためにはパラメータパックを@<b>{expansion (展開)}する必要がある。
 
-//emlist[型パラメータパックの展開][cpp-example]{
+//emlist[型パラメータパックの展開][]{
 #include <tuple>
 template <class... Types> class X {
-    // 型をtupleのテンプレート引数に展開
-    std::tuple<Types...> values;
+    std::tuple<Types...> values; // 型をtupleのテンプレート引数に展開
 };
-
-int main(){
-    X<int, double, float> x;
-}
 //}
 
-//emlist[関数パラメータパックの展開][cpp-example]{
+//emlist[関数パラメータパックの展開][]{
 #include <iostream>
 
-// パラメータパックが空になったら終了
-void print() {}
+void print() {} // パラメータパックが空になったら終了
 
 template <class Head, class... Tail>
 void print(Head head, Tail... tail) {
     std::cout << head << "\n"; // 1つ目の引数を処理
     print(tail...); // 残りを再展開してheadとtailに分解
-}
-
-
-int main() {
-    print(1, 2.0, "3");
 }
 //}
 
@@ -94,8 +80,7 @@ int main(){
 
 @<code>{template <class...> class TList}という文法が登場した。
 これはテンプレートテンプレートパラメータである。
-テンプレート引数を可変個とる何らかの型をテンプレートパラメータにとることができる。
-@<code>{list_element<N, type_list<Head, Tail...>>}のように、決め打ちで受け取ってもいいが、
-型リストとみなせるものをまとめて受け取れるようになるのでこのほうがいいだろう。
+テンプレート引数を可変個とる型（テンプレート）をパラメータにとることができる。
+型リストとみなせるもの（@<code>{std::tuple}など）も受け取れるようになるのでこのほうがよい。
 
 このような型リストを操作する方法はメタプログラミングではよく行われる。
