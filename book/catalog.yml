@@ -2,18 +2,24 @@ PREDEF:
   - intro.re
 
 CHAPS:
-  - alwe-dummy.re
-  - hsjoihs-dummy.re
-  - lugendre-dummy.re
-  - mitama-tmp-basics.re
-  - wreulicke-dummy.re
-  - yuche-yuche1.re
-  - yuche-yuche2.re
-  - yuche-yuche3.re
-  - yuche-yuche4.re
-  - yuche-yuche5.re
-  - yuche-yuche6.re
-  - yuche-yuche7.re
+  - 第1部:
+    - alwe-dummy.re
+  - C++メタプログラミング:
+    - mitama-tmp-basics.re
+    - mitama-sfinae-awaken.re
+    - mitama-constexpr.re
+    - mitama-variadic-templates.re
+    - mitama-concepts.re
+    - mitama-conclusion.re
+  - マネジメント:
+    - yuche-yuche1.re
+    - yuche-yuche2.re
+    - yuche-yuche3.re
+    - yuche-yuche4.re
+    - yuche-yuche5.re
+    - yuche-yuche6.re
+    - yuche-yuche7.re
+
 APPENDIX:
 
 POSTDEF:

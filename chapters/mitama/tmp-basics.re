@@ -1,8 +1,4 @@
-= C++メタプログラミングの夜明け
-
-この章ではC++のテンプレートメタプログラミングについて解説する。
-サンプルコードでC++の機能を使い倒すことになるだろうが、
-いちいち解説していては紙面がいくらあっても足りないので解説は最低限に留める。
+= メタプログラミングの夜明け
 
 == メタプログラミングとは
 
@@ -21,13 +17,12 @@
 
 === C言語から受け継いだマクロ
 
-C++はC言語から存在するCプリプロセッサマクロが使える。
-プリプロセッサマクロによってメタプログラミングができる。
+C++はCプリプロセッサマクロによってメタプログラミングができる。
 ただし、プリプロセッサマクロは単なる文字列の置き換えにすぎない。
-名前空間を汚染するし、意図しないマクロの展開のデバッグは果てしなく困難である。
+名前空間を汚染するうえ、マクロのデバッグは果てしなく困難である。
 
-C++にはテンプレートという機能がある。
-テンプレートを使うことによって型システムに守られたメタプログラミングが可能になる。
+安心してほしい、C++にはテンプレートという機能がある。
+テンプレートによって型システムに守られたメタプログラミングが可能になる。
 
 === テンプレート
 
@@ -39,7 +34,7 @@ C++にはテンプレートという機能がある。
 
 C++にはオーバーロードがあり、関数を引数の型で呼び分けることができるので次が可能。
 
-//emlist[関数オーバーロード][cpp]{
+//emlist[関数オーバーロード][cpp-example]{
 int twice(int a, int b) { return a + b; }           // #1
 double twice(double a, double b) { return a + b; }  // #2
 
@@ -51,17 +46,16 @@ int main() {
 
 関数本体は全く同じであるので、こんなものをたくさん書きたくはない。
 コンパイラに自動生成してほしい。
-
 そこで関数テンプレートを使う。
 
-//emlist[関数テンプレート][cpp]{
+//emlist[関数テンプレート][cpp-example]{
 template <class T>
 T twice(T a, T b) { return a + b; }
 
 int main() {
     twice<int>(1, 2); // T = int
     twice(1.1, 2.2);  // T = double
-    twice(1.1, 2);    // Error: T = int or double ???
+    // twice(1.1, 2); // Error: T = int or double ???
 }
 //}
 
@@ -71,7 +65,7 @@ int main() {
 
 同様にクラステンプレートも可能である。
 
-//emlist[クラステンプレート][cpp]{
+//emlist[クラステンプレート][]{
 template <class T>
 struct MyClass {
     T value_;
@@ -97,24 +91,27 @@ int main() {
 クラス名に対して@<code>{MyClass<void>}のように
 明示的にテンプレートパラメータを指定したものをクラステンプレートの明示的特殊化と呼ぶ。
 
-//emlist[クラステンプレートの明示的特殊化][cpp]{
+//emlist[クラステンプレートの明示的特殊化][cpp-example]{
+#include <cassert>
+#include <string>
+
 template <class T>
-strcut MyClass { // プライマリーテンプレート
-    static func() { return "primary"; }
+struct MyClass { // プライマリーテンプレート
+    static std::string func() { return "primary"; }
 };
 
 template <>
-strcut MyClass<void> { // テンプレートの明示的特殊化
-    static func() { return "specialization"; }
+struct MyClass<void> { // テンプレートの明示的特殊化
+    static std::string func() { return "specialization"; }
 };
 
 int main() {
-    MyClass<int>::func();  // returns "primary"
-    MyClass<void>::func(); // returns "specialization"
+    assert(MyClass<int>::func() == "primary");
+    assert(MyClass<void>::func() == "specialization");
 }
 //}
 
-== 原初のメタプログラミング (enum hack)
+== 原初のメタプログラミング
 
  * テンプレートには型だけではなく整数を渡せる
  * テンプレートを明示的に特殊化できる
@@ -122,15 +119,15 @@ int main() {
 以上の2点に加えてクラステンプレートが再帰的に実体化できるという事実により、
 メタプログラミングが可能となった。
 
-早速、コンパイル時に階乗を計算を計算してみよう。
+早速、コンパイル時に階乗を計算してみよう。
 
-//emlist[enum hack][cpp]{
+//emlist[enum hack][cpp-example]{
 template <int N>
-struct Factorial 
+struct Factorial
 { enum { value = N * Factorial<N - 1>::value }; };
 
 template <>
-struct Factorial<0> 
+struct Factorial<0>
 { enum { value = 1 }; };
 
 int main() {
@@ -140,6 +137,12 @@ int main() {
 
 テンプレートの明示的特殊化が分岐として機能し、再帰的にクラステンプレートが実体化することにより計算が可能になる。
 
-これが、テンプレートメタプログラミングのアイデアである。
-この技法が発見（発明ではなく発見）されたことをきっかけに次々とメタプログラミング技法が次々と見出されることになる。
-結果として、C++は大メタプログラミング時代に突入した。
+さらっと登場した@<code>{template <int N>}なる文法は@<b>{Non-Type Template Parameter (非型テンプレート引数)}という機能。
+型ではないもの（C++17までは整数かenum値のみ）を渡すことができる機能である。
+整数を直接テンプレートに埋め込めるため、ペアノ数などを型で表現する必要はない。
+
+これが、原初に発見された（発明ではなく発見）テンプレートメタプログラミングのアイデアである。
+最初にメタプログラミングが発見されたあと、次々とメタプログラミング技法が見出されることになる。
+結果として、C++03からC++11にかけて、C++はメタプログラミング時代に突入した。
+このメタプログラミングの波は他の言語にも大きな影響を与えたのではないかと思う。
+C++11からはコンパイル時有理数算術などが標準で当たり前のようにサポートされている。

@@ -5,6 +5,10 @@ executors:
     docker:
       - image: vvakame/review:4.0
     working_directory: /repo
+  cpp:
+    docker:
+      - image: enumack/mitama-env:clang-8.0.0
+    working_directory: /repo
 
 jobs:
   build:
@@ -14,8 +18,29 @@ jobs:
       - run: ./build.sh
       - store_artifacts:
           path: /repo/book.pdf
+      - persist_to_workspace:
+          root: /repo
+          paths:
+            - chapters
+  cpp_check:
+    executor: cpp
+    steps:
+      - attach_workspace:
+          at: .
+      - run: |
+          mkdir -p test
+          find chapters/mitama -type f -name \*.re | xargs awk '\
+              BEGIN { i=0 } { file=FILENAME; sub("chapter/mitama/", "", file); gsub("/", "-", file); sub(".re", "", file);} \
+              /\/\/emlist\[.*\]\[cpp-example\]\{$/,/\/\/\}$/ { \
+                  if ($0 ~ "\/\/emlist\[.*\]\[cpp-example\]\{$") { i++ } \
+                  else { print $0 >> "test/" file "-" i ".cpp" } \
+              }'
+          find test -type f -name \*.cpp | xargs -I@ bash -c "echo @;$CXX -I./mitama-cpp-result/include/ @ -std=c++17 && ./a.out"
 
 workflows:
   build:
     jobs:
       - build
+      - cpp_check:
+          requires:
+            - build
