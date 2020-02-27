@@ -10,7 +10,7 @@ template <class... Args>
 void func(Args... args); // 可変長関数テンプレート
 //}
 
-@<code>{Args}や@<code>{args}などは@<b>{パラメータパック}と呼ばれ、使用するためにはパラメータパックを@<b>{expansion (展開)}する必要がある。
+@<code>{Args}や@<code>{args}などは@<b>{パラメータパック}と呼ばれ、使用するためにはパラメータパックを@<b>{expansion（展開）}する必要がある。
 
 //emlist[型パラメータパックの展開][]{
 #include <tuple>
@@ -44,8 +44,8 @@ template <class... Types> class type_list {};
 
 == 型レベルアルゴリズム (線形再帰)
 
-先程の型リストに対して、N個目の型を得ることができる型レベル関数を作ろう。
-最も簡単であろう実装は、線形再帰である。
+さきほどの型リストに対して、N個目の型を得ることができる型レベル関数を作ろう。
+もっとも簡単であろう実装は、線形再帰である。
 @<code>{list_element<N, Types...>}に対して、N回@<code>{Types...}の先頭を取り除いたあと、先頭がN番目の型である。
 
 //emlist[線形再帰による探索][cpp-example]{
@@ -75,7 +75,7 @@ int main(){
 }
 //}
 
-再帰的なクラスの実体化による継承の結果、目的の型をメンバ型として持つクラスが出来上がる。
+再帰的なクラスの実体化による継承の結果、目的の型をメンバ型として持つクラスができ上がる。
 @<code>{list_element_t<1, type_list<A, B, C>}は@<code>{B}となる。
 
 @<code>{template <class...> class TList}という文法が登場した。
