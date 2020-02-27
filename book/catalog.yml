@@ -2,9 +2,16 @@ PREDEF:
   - intro.re
 
 CHAPS:
-  - 第1部:
-    - alwe-dummy.re
-  - C++メタプログラミング:
+  - ミンコフスキー空間での初等平面幾何:
+    - hsjoihs-hsjoihs0.re
+    - hsjoihs-hsjoihs1.re
+    - hsjoihs-hsjoihs2.re
+    - hsjoihs-hsjoihs3.re
+    - hsjoihs-hsjoihs4.re
+    - hsjoihs-hsjoihs5.re
+    - hsjoihs-hsjoihs6.re
+    - hsjoihs-hsjoihs-end.re
+  - C++メタプログラミング概論:
     - mitama-tmp-basics.re
     - mitama-sfinae-awaken.re
     - mitama-constexpr.re
