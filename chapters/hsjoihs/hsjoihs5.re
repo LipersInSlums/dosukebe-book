@@ -31,7 +31,8 @@
 黄線なしが…『空・空・空』『空・空・紫』『空・紫・紫』『紫・紫・紫』どれも問題なさそうですね。
 ということで、あと六種類あって、全部で九種類、ですか？
 
-//indepimage[RandomTriangles][残り六種の三角形すべてを含む図] 
+
+//indepimage[RandomTriangles][残り六種の三角形……じゃなくて三辺形全てを含む図] 
 
 （@<href>{https://www.desmos.com/calculator/gwwd8bax8e}）
 
